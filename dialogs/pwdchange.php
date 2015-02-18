@@ -130,12 +130,11 @@ function getBody() {
 	else {
 
 		//
-		// use zarafa-admin to change password
+		// use MAPI in SOAP connection to change the password
 		// (this part is basically the original zarafa-passwd
-		// plugin (and really unsecure))
+		// plugin)
 		//
 
-		$passwd_cmd = "/usr/bin/zarafa-passwd -u %s -o %s -p %s";
 		if (
 			($username != null) &&  
 			($password != null) &&  
@@ -145,9 +144,10 @@ function getBody() {
 		) {
 
 			// all information correct, change password
-			$mycmd = sprintf($passwd_cmd, $username, $password, $newpw1);
-			exec($mycmd,$arrayout, $retval);
-			if ($retval == 0) {
+			$store = $GLOBALS['mapisession']->getDefaultMessageStore();
+			$userinfo = mapi_zarafa_getuser_by_name($store, $username);
+
+			if (mapi_zarafa_setuser($store, $userinfo['userid'], $username, $userinfo['fullname'], $userinfo['emailaddress'], $newpw1, 0, $userinfo['admin'])) {
 				echo _("success: password update");
 			} else {
 				echo _("failure: password update");

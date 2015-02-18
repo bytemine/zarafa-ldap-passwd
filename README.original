@@ -16,8 +16,7 @@ You may use it in Commercial Zarafa Groupware but for this plugin the License of
 that corresponds to your Commercial Zarafa Groupware applies.
 
 To install it, just copy the content of the passwd-0.99.0.tgz archive into your plugins folder. Please 
-adapt the dialogs/pwdchange.php file according your backend needs (currently zarafa-passwd is in use 
-but taken from /usr/local/bin folder).
+adapt the config.inc.php file according your backend needs.
 
 A word about languages... They're in lang folder defined. I did it for the English and German language.
 Feel free to add your native language. It is not difficult. Just translate the phrases in file and 
